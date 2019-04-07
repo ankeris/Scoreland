@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="stylesheet" href="styles/global.css">
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
@@ -25,8 +26,14 @@
     <title>React App</title>
   </head>
   <body>
+    <header class="App-header bg-dark">
+      <div class="flex-row">
+        <object class="App-logo" data="logo.svg" type="image/svg+xml"></object>
+        <h1>Scoreland</h1>
+      </div>
+    </header>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <div id="root" class="bg-dark"></div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

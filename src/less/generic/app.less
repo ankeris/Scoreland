@@ -1,0 +1,55 @@
+#root {
+  min-height: 100vh;
+  overflow: hidden;
+}
+.App {
+  text-align: center;
+  overflow: hidden;
+}
+
+.flex-row {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 1s ease-in-out;
+  animation-direction: alternate-reverse;
+  width: 100px;
+}
+
+.App-header {
+  font-family: 'cataclysmo';
+  font-size: calc(10px + 2vmin);
+  color: white;
+  border-bottom: 20px dashed @green;
+}
+
+.grid-box {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	list-style: none;
+}
+
+.grid-box__item {
+	width: 285px;
+  margin: 30px;
+  border-radius: 10px;
+}
+
+.title {
+  font-family: 'cataclysmo';
+  color: @color-info;
+  letter-spacing: 2px;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(10deg);
+  }
+}
