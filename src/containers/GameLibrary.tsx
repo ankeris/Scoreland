@@ -6,9 +6,6 @@ import {selfpong} from '../gamesLogic/selfpong';
 const GameLibrary: FunctionComponent<{games: Array<Game>}> = (props) => {
   // Declare a new state variable, which we'll call "count"
   useEffect(()=> {
-    selfpong((score: number) => {
-      console.log(score);
-    });
   }, [])
   const gamesExist: boolean = props.games.length > 0;
   return (
@@ -18,7 +15,6 @@ const GameLibrary: FunctionComponent<{games: Array<Game>}> = (props) => {
         <GameButton key={game._id} game={game}></GameButton>
         ) : <h1>loading games...</h1>
       }
-      <div id="myContainer"></div>
     </React.Fragment>
   );
 }

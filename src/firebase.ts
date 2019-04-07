@@ -59,7 +59,14 @@ class Firebase {
 	// async getCurrentUserQuote() {
 	// 	const quote = await this.db.doc(`users_codedamn_video/${this.auth.currentUser.uid}`).get()
 	// 	return quote.get('quote')
-    // }
+	// }
+	getOneById(collection: string, _id: string): Promise<any> {
+		return new Promise((resolve, reject) => {
+			this.db.collection(collection).doc(_id).get().then((snapshot) => {
+				resolve(snapshot)
+			});
+		});
+	}
     subscribeTo(collection: string, callback: Function) {
         this.db.collection(collection).onSnapshot(function(querySnapshot) {
             const newArr: any = [];

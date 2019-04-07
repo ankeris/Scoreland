@@ -8,7 +8,7 @@ const GameButton: FunctionComponent<{game: Game}> = ({game}) => {
     return (
       <Link className="grid-box__item bg-light"
         to={{
-          pathname: "/game/" + toLink(game.name),
+          pathname: "/game/" + game._id,
           state: { game }
         }}>
         <h2 className="title">{game.name}</h2>

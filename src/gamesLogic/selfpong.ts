@@ -17,8 +17,8 @@ const selfpong = function(finalScore: Function) {
         }
         
         p.setup = () => {
-            myCanvas = p.createCanvas(260,260).parent('myContainer');
-            playRect = new Rectangle(160, 250, 50, 10, 2, 2);
+            myCanvas = p.createCanvas(660,260).parent('myContainer');
+            playRect = new Rectangle(160, 250, 70, 10, 5, 5);
         }
         
         // Ball appears;
@@ -39,7 +39,7 @@ const selfpong = function(finalScore: Function) {
             p.fill(22,180,200);
             p.textSize(22);
             p.pointsCounter();
-        
+            
             playRect.displayRect();
             playRect.keyIsDown();
             playRect.fixed();
@@ -97,8 +97,8 @@ const selfpong = function(finalScore: Function) {
             constructor(x, y) {
                 this.x = x;
                 this.y = y;
-                this.xspeed = -2;
-                this.yspeed = -3;
+                this.xspeed = -3;
+                this.yspeed = -4;
                 this.r = 20;
             }
             
