@@ -29,7 +29,7 @@ class App extends Component<{}, State> {
   render() {
     return (
       <div className="App">
-          <div className="content-section grid-box">
+          <div className="content-section grid-box push-vertical">
             <GameLibrary games={this.state.games}></GameLibrary>
           </div>
           <a

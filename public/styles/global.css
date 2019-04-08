@@ -337,6 +337,7 @@ template {
 #root {
   min-height: 100vh;
   overflow: hidden;
+  color: #d9e4ee;
 }
 .App {
   text-align: center;
@@ -370,6 +371,13 @@ template {
   margin: 30px;
   border-radius: 10px;
 }
+.grid-box__item .image {
+  height: 170px;
+  width: 100%;
+  border-top: 4px solid #213a46;
+  border-bottom: 4px solid #213a46;
+  object-fit: cover;
+}
 .title {
   font-family: 'cataclysmo';
   color: #d9e4ee;
@@ -387,6 +395,25 @@ template {
   color: #61dafb;
   text-decoration: underline;
 }
+.button {
+  color: aliceblue;
+  cursor: pointer;
+  transition-duration: 0.2s;
+}
+.button--funky {
+  border: 2px solid #3cf291;
+}
+.button--funky:hover {
+  border: 15px solid #d9e4ee;
+  transform: rotate(-10deg) scale(1.2);
+}
+.button--danger {
+  border: 2px solid #f17f29;
+}
+.button--danger:hover {
+  border: 15px solid #fe4a49;
+  transform: rotate(-10deg) scale(1.2);
+}
 .content-section {
   max-width: 1124px;
   margin: 0 auto;
@@ -397,4 +424,14 @@ template {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+.push-bottom {
+  margin-bottom: 30px;
+}
+.push-top {
+  margin-top: 30px;
+}
+.push-vertical {
+  margin-top: 30px;
+  margin-bottom: 30px;
 }

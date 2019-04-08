@@ -2,3 +2,23 @@
     color: #61dafb;
     text-decoration: underline;
 }
+
+.button {
+    color: aliceblue;
+    cursor: pointer;
+    transition-duration: 0.2s;
+    &--funky {
+        border: 2px solid @color-success;
+        &:hover {
+            border: 15px solid @color-info;
+            transform: rotate(-10deg) scale(1.2);
+        }
+    }
+    &--danger {
+        border: 2px solid @color-warning;
+        &:hover {
+            border: 15px solid @color-danger;
+            transform: rotate(-10deg) scale(1.2);
+        }
+    }
+}

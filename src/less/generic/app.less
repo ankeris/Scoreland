@@ -1,12 +1,12 @@
 #root {
   min-height: 100vh;
   overflow: hidden;
+  color: @color-info;
 }
 .App {
   text-align: center;
   overflow: hidden;
 }
-
 .flex-row {
   display: flex;
   align-items: center;
@@ -36,6 +36,13 @@
     width: 285px;
     margin: 30px;
     border-radius: 10px;
+    .image {
+      height: 170px;
+      width: 100%;
+      border-top: 4px solid @green-dark;
+      border-bottom: 4px solid @green-dark;
+      object-fit: cover;
+    }
   }
 }
 
