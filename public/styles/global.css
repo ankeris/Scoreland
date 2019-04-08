@@ -365,6 +365,7 @@ template {
   list-style: none;
 }
 .grid-box__item {
+  text-align: center;
   width: 285px;
   margin: 30px;
   border-radius: 10px;
@@ -390,4 +391,10 @@ template {
   max-width: 1124px;
   margin: 0 auto;
   box-sizing: border-box;
+}
+.content-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
