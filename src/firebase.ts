@@ -10,7 +10,6 @@ const config = {
     storageBucket: "",
     messagingSenderId: process.env.REACT_APP_FIRE_MSG_SENDER_ID,
 };
-console.log(process.env);
 
 class Firebase {
     private auth;
@@ -21,20 +20,21 @@ class Firebase {
 		this.db = app.firestore()
 	}
 
-	// login(email, password) {
-	// 	return this.auth.signInWithEmailAndPassword(email, password)
-	// }
+	login(email, password) {
+		return this.auth.signInWithEmailAndPassword(email, password)
+	}
 
-	// logout() {
-	// 	return this.auth.signOut()
-	// }
+	logout() {
+		console.log('logging out . . .');
+		return this.auth.signOut()
+	}
 
-	// async register(name, email, password) {
-	// 	await this.auth.createUserWithEmailAndPassword(email, password)
-	// 	return this.auth.currentUser.updateProfile({
-	// 		displayName: name
-	// 	})
-	// }
+	async register(name, email, password) {
+		await this.auth.createUserWithEmailAndPassword(email, password)
+		return this.auth.currentUser.updateProfile({
+			displayName: name
+		})
+	}
 
 	// addQuote(quote) {
 	// 	if(!this.auth.currentUser) {
@@ -46,15 +46,16 @@ class Firebase {
 	// 	})
 	// }
 
-	// isInitialized() {
-	// 	return new Promise(resolve => {
-	// 		this.auth.onAuthStateChanged(resolve)
-	// 	})
-	// }
+	isInitialized() {
+		return new Promise<boolean>(resolve => {
+			this.auth.onAuthStateChanged(resolve)
+		})
+	}
 
-	// getCurrentUsername() {
-	// 	return this.auth.currentUser && this.auth.currentUser.displayName
-	// }
+	getCurrentUsername() {
+		console.log(this.auth.currentUser);
+		return this.auth.currentUser && this.auth.currentUser.displayName
+	}
 
 	// async getCurrentUserQuote() {
 	// 	const quote = await this.db.doc(`users_codedamn_video/${this.auth.currentUser.uid}`).get()
