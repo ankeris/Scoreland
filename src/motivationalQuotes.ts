@@ -24,5 +24,5 @@ export default new class Motivation {
         "It’s Not Whether You Get Knocked Down, It’s Whether You Get Up." ]
 	}
 
-	getRandomQuote = (): string => this.quotesArr[Math.floor((Math.random() * this.quotesArr.length) + 1)];
+	getRandomQuote = (): string => this.quotesArr[Math.floor((Math.random() * this.quotesArr.length))];
 }
