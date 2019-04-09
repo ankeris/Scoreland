@@ -6,7 +6,7 @@ import {
   Switch,
 } from 'react-router-dom'
 import firebase from './firebase';
-
+import Header from './containers/Header';
 import Auth from './routes/Auth';
 import Login from './routes/Login';
 import Library from './routes/Library';
@@ -37,10 +37,12 @@ const Scoreland = () => {
   useEffect(() => {
     firebase.isInitialized().then((user) => {
       if (user) {
+        firebase.getCurrentUsername()
         setUserAuthenticated(true);
         setFirebaseLoaded(true);
       }
       else  {
+        firebase.getCurrentUsername()
         setFirebaseLoaded(true);
         setUserAuthenticated(false)
       };
@@ -52,6 +54,7 @@ const Scoreland = () => {
   }, []);
   return firebaseLoaded ? (
     <BrowserRouter>
+      <Header />
       <Switch>
         <Route path="/login" render={props => <Login {...props} />} />
         <Route path="/register" render={props => <Register {...props} />} />

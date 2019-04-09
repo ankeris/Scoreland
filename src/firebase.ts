@@ -36,15 +36,9 @@ class Firebase {
 		})
 	}
 
-	// addQuote(quote) {
-	// 	if(!this.auth.currentUser) {
-	// 		return alert('Not authorized')
-	// 	}
-
-	// 	return this.db.doc(`users_codedamn_video/${this.auth.currentUser.uid}`).set({
-	// 		quote
-	// 	})
-	// }
+	updateHighestScore(doc, highestScore, highestScorer) {
+		return this.db.collection('games').doc(doc).update({ highestScore, highestScorer });
+	}
 
 	isInitialized() {
 		return new Promise<boolean>(resolve => {

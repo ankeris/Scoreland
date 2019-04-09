@@ -1,24 +1,29 @@
 import React, { useState } from 'react';
 import firebase from '../firebase';
+import Loading from '../components/Loading';
 
-export default function SignIn() {
+export default function SignIn(props) {
+const [loading, setLoading] = useState<boolean>(false);
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
 
-return (
-    <form onSubmit={e => {
-      e.preventDefault()
-      login();
+return !loading ? (
+    <form className="form content-section content-center push-vertical" onSubmit={e => {
+        e.preventDefault();
+        login();
       }}>
-      <input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)}/>
-      <input id="password" type="password" value={password} onChange={e => setPassword(e.target.value)}/>
-      <input type="submit" value="Sign In" />
+      
+      <input className="form__input" type="email" value={email} onChange={e => setEmail(e.target.value)}/>
+      <input className="form__input" type="password" value={password} onChange={e => setPassword(e.target.value)}/>
+      <input className="form__input button button--funky" type="submit" value="Sign In" />
     </form>
-)
+) : <Loading />
 async function login() {
+    setLoading(true);
     try {
       await firebase.login(email, password).then(e => {
-        console.log(e);
+        localStorage.setItem('user', e.user.displayName);
+        props.history.replace('/library');
       });
     } catch (err) {
       alert(err)

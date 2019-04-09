@@ -1,6 +1,8 @@
 export interface Game {
+    _id?: string;
     name: string;
     complexity: number;
-    _id?: string;
+    highestScore: number;
+    highestScorer: string;
     imagelink?: string;
 }

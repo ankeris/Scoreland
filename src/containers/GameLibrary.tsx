@@ -2,6 +2,7 @@ import React, { FunctionComponent, useState, useEffect } from 'react';
 import { Game } from '../models/Game.model';
 import GameButton from '../components/GameButton';
 import {selfpong} from '../gamesLogic/selfpong';
+import Loading from '../components/Loading';
 
 const GameLibrary: FunctionComponent<{games: Array<Game>}> = (props) => {
   // Declare a new state variable, which we'll call "count"
@@ -13,7 +14,7 @@ const GameLibrary: FunctionComponent<{games: Array<Game>}> = (props) => {
       {
         gamesExist ? props.games.map((game: Game) => 
         <GameButton key={game._id} game={game}></GameButton>
-        ) : <h1>loading games...</h1>
+        ) : <Loading />
       }
     </React.Fragment>
   );

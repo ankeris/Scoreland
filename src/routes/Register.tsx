@@ -19,7 +19,7 @@ return (
 )
 async function onRegister() {
     try {
-      await firebase.register(name, email, password);
+      await firebase.register(nickname, email, password);
       props.history.replace('/library');
     } catch (err) {
       alert(err)

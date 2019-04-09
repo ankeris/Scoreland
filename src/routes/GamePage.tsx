@@ -10,20 +10,27 @@ import LinkButton from '../components/LinkButton';
 
 let gameCanvas;
 const GamePage: FunctionComponent<any> = (props: RouteComponentProps) => {
-  const [gameInfo, setGameInfo] = useState<Game>({name: '', complexity: 0});
+  const [gameInfo, setGameInfo] = useState<Game>({name: '', complexity: 0, highestScore: 0, highestScorer: '', _id: ''});
   const [gameLost, setGameLost] = useState<Boolean>(false);
   const [score, setScore] = useState<Number>(0);
   const restartGame = () => {
     setGameLost(false);
-    setGameInfo({name: gameInfo.name, complexity: gameInfo.complexity});
+    const gameId = props.match.params.id;
+    firebase.getOneById('games', gameId).then(data => {
+      const game: Game = data.data();
+      game._id = data.id;
+      setGameInfo(game);
+    })
   };
 
   useEffect(() => {
     const gameId = props.match.params.id;
     firebase.getOneById('games', gameId).then(data => {
-      setGameInfo(data.data());
+      const game: Game = data.data();
+      game._id = data.id;
+      setGameInfo(game);
     })
-  }, [])
+  }, []);
 
   useEffect(() => {
     console.log('received: ' + gameInfo.name);
@@ -32,6 +39,11 @@ const GamePage: FunctionComponent<any> = (props: RouteComponentProps) => {
         gameCanvas = selfpong(score => {
           setScore(score);
           setGameLost(true);
+          console.log(gameInfo.highestScore);
+          
+          if (score > gameInfo.highestScore) {
+            firebase.updateHighestScore(gameInfo._id, score, localStorage.getItem('user'));
+          }
         })
         break;
       case 'Other':
