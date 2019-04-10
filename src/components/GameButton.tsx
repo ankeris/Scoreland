@@ -15,7 +15,7 @@ const GameButton: FunctionComponent<{game: Game}> = ({game}) => {
         <img className="image" src={game.imagelink} alt=""/>
         <h4>Complexity: <span className={complexityColor}>{game.complexity}</span></h4>
         <p>Highest score: <span>{game.highestScore}</span></p>
-        <p>By: <span>{game.highestScorer}</span></p>
+        <p>By: <span>{game.highestScorer}🤩</span></p>
       </Link>
     );
 }

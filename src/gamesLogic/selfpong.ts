@@ -97,8 +97,8 @@ const selfpong = function(finalScore: Function) {
             constructor(x, y) {
                 this.x = x;
                 this.y = y;
-                this.xspeed = -3;
-                this.yspeed = -4;
+                this.xspeed = -5;
+                this.yspeed = -6;
                 this.r = 20;
             }
             
@@ -126,7 +126,11 @@ const selfpong = function(finalScore: Function) {
                 // if (playRect.x > this.x) console.log(this.y);
                 if ((this.y >= 240 && this.y <= 245) && this.x < playRect.x + playRect.w/2 && this.x > playRect.x - playRect.w/2){
                     this.yspeed = this.yspeed * -1;
-                
+                    if (this.xspeed > 0) {
+                        this.xspeed = Math.floor(Math.random() * 5)
+                    } else {
+                        this.xspeed = Math.floor(Math.random() * -4)
+                    }
                     //adds +1 point on hit
                     points = points + 1;
                 }

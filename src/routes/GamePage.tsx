@@ -7,6 +7,7 @@ import DynamicButtoon from '../components/DynamicButton';
 import Motivation from '../motivationalQuotes';
 import CountUp from 'react-countup';
 import LinkButton from '../components/LinkButton';
+import Loading from '../components/Loading';
 
 let gameCanvas;
 const GamePage: FunctionComponent<any> = (props: RouteComponentProps) => {
@@ -44,6 +45,7 @@ const GamePage: FunctionComponent<any> = (props: RouteComponentProps) => {
           if (score > gameInfo.highestScore) {
             firebase.updateHighestScore(gameInfo._id, score, localStorage.getItem('user'));
           }
+          return;
         })
         break;
       case 'Other':
@@ -57,9 +59,10 @@ const GamePage: FunctionComponent<any> = (props: RouteComponentProps) => {
     if (gameLost) gameCanvas.remove();
   }, [gameLost])
   
-  return (
+  return gameInfo ? (
     <div className="content-section content-center">
-      <h1 className="title">{gameInfo ? gameInfo.name : 'Loading'}</h1>
+      <LinkButton text="Go Back" link="/library" modifier="danger"></LinkButton>
+      <h1 className="title">{gameInfo.name}</h1>
       {gameLost ? 
       <div className="content-center">
         <h2><CountUp end={score} className="title" prefix="score: "/></h2>
@@ -71,7 +74,7 @@ const GamePage: FunctionComponent<any> = (props: RouteComponentProps) => {
       : 
       <div id="myContainer"></div>}
     </div>
-  );
+  ) : <Loading></Loading>;
 }
 export default GamePage
 
