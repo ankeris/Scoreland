@@ -13,9 +13,12 @@
 .flex-row {
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: row;
 }
-
+.full-width {
+  width: 100%;
+}
 .App-logo {
   animation: App-logo-spin infinite 1s ease-in-out;
   animation-direction: alternate-reverse;
@@ -23,6 +26,8 @@
 }
 
 .App-header {
+  display: flex;
+  justify-content: space-between;
   font-family: 'cataclysmo';
   font-size: calc(10px + 2vmin);
   color: white;

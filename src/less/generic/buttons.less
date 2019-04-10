@@ -5,9 +5,17 @@
 
 .button {
     color: aliceblue;
-    background-color: @green-dark;
     cursor: pointer;
     transition-duration: 0.2s;
+    opacity: 1;
+    padding: 10px;
+    border-radius: 0.4rem;
+    &--small {
+        max-width: 200px;
+    }
+    &--serious {
+        background-color: @green-dark;
+    }
     &--funky {
         border: 2px solid @color-success !important;
         &:hover {
@@ -16,10 +24,9 @@
         }
     }
     &--danger {
-        border: 2px solid @color-warning;
+        border: 2px solid @color-warning !important;
         &:hover {
-            border: 15px solid @color-danger;
-            transform: rotate(-5deg) scale(1.1);
+            border: 2px solid @color-danger !important;
         }
     }
 }
