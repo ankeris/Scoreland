@@ -13,7 +13,6 @@ class App extends Component<RouteComponentProps<any>, State> {
     this.state = {
       games: []
     }
-    this.logout = this.logout.bind(this);
   }
   componentDidMount() {
     Firebase.getAll('games').then(games => {
@@ -29,15 +28,10 @@ class App extends Component<RouteComponentProps<any>, State> {
         })
     })
   }
-  async logout() {
-    console.log('trying to log out');
-    await Firebase.logout();
-    this.props.history.push('/login');
-  }
+  
   render() {
     return (
       <div className="App">
-          <div onClick={this.logout}>Logout</div>
           <div className="content-section grid-box push-vertical">
             <GameLibrary games={this.state.games}></GameLibrary>
           </div>

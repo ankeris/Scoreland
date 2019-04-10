@@ -36,31 +36,28 @@ const Scoreland = () => {
 
   useEffect(() => {
     firebase.isInitialized().then((user) => {
+      console.log(user);
       if (user) {
-        firebase.getCurrentUsername()
         setUserAuthenticated(true);
         setFirebaseLoaded(true);
       }
       else  {
-        firebase.getCurrentUsername()
         setFirebaseLoaded(true);
         setUserAuthenticated(false)
       };
     })
-    // if(!firebase.getCurrentUsername()) {
-    //   // not logged in
-    //   alert('Please login first')
-    // }
   }, []);
+
   return firebaseLoaded ? (
     <BrowserRouter>
-      <Header />
+      <Header setAuth={(e) => setUserAuthenticated(e)} authed={userAuthenticated}/>
       <Switch>
-        <Route path="/login" render={props => <Login {...props} />} />
+        <Route path="/login" render={props => <Login {...props} setAuth={(e) => setUserAuthenticated(e)} />} />
         <Route path="/register" render={props => <Register {...props} />} />
         <Route path="/auth" render={props => <Auth {...props} />} />
         <PrivateRoute authed={userAuthenticated} path="/library" component={Library} />
         <PrivateRoute authed={userAuthenticated} path="/game/:id" component={GamePage} />
+        <Redirect from="/" to='/library' />
       </Switch>
     </BrowserRouter>
   ) : <Loading />
