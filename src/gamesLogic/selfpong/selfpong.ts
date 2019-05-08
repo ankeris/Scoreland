@@ -1,6 +1,5 @@
 import p5 from "p5";
 let points = 0;
-let myCanvas;
 let balls: any = [];
 let playRect;
 let startGame = "Press here to spawn a ball";
@@ -17,7 +16,7 @@ const selfpong = function(finalScore: Function) {
         };
 
         p.setup = () => {
-            myCanvas = p.createCanvas(660, 260).parent("myContainer");
+            p.createCanvas(660, 260).parent("myContainer");
             playRect = new Rectangle(160, 250, 70, 10, 5, 5);
         };
 
@@ -135,9 +134,6 @@ const selfpong = function(finalScore: Function) {
 
                 if (this.y > 290) {
                     finalScore(points, p);
-                    balls.splice(0, balls.length);
-                    points = 0;
-                    p.fill(255, 0, 0);
                 }
             }
         }
