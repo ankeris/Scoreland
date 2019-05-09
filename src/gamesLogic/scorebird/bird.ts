@@ -1,8 +1,8 @@
 export class Bird {
     y = this.p5.height / 2;
     x = 64;
-    gravity = 0.7;
-    lift = -12;
+    gravity = 0.4;
+    lift = -10;
     velocity = 0;
     constructor(public p5) {}
 

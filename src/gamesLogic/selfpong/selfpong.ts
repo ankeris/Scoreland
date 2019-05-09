@@ -133,7 +133,9 @@ const selfpong = function(finalScore: Function) {
                 }
 
                 if (this.y > 290) {
-                    finalScore(points, p);
+                    finalScore(points);
+                    p.remove();
+                    p.clear();
                 }
             }
         }

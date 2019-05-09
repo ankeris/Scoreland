@@ -1,6 +1,6 @@
-import app from 'firebase/app'
-import 'firebase/auth'
-import 'firebase/firebase-firestore'
+import app from "firebase/app";
+import "firebase/auth";
+import "firebase/firebase-firestore";
 
 const config = {
     apiKey: process.env.REACT_APP_FIRE_API_KEY,
@@ -8,74 +8,81 @@ const config = {
     databaseURL: process.env.REACT_APP_FIRE_DB_URL,
     projectId: process.env.REACT_APP_FIRE_PRJ_ID,
     storageBucket: "",
-    messagingSenderId: process.env.REACT_APP_FIRE_MSG_SENDER_ID,
+    messagingSenderId: process.env.REACT_APP_FIRE_MSG_SENDER_ID
 };
 
 class Firebase {
     private auth;
     private db;
-	constructor() {
-		app.initializeApp(config)
-		this.auth = app.auth()
-		this.db = app.firestore()
-	}
+    constructor() {
+        app.initializeApp(config);
+        this.auth = app.auth();
+        this.db = app.firestore();
+    }
 
-	login(email, password) {
-		return this.auth.signInWithEmailAndPassword(email, password)
-	}
+    login(email, password) {
+        return this.auth.signInWithEmailAndPassword(email, password);
+    }
 
-	logout() {
-		console.log('logging out . . .');
-		return this.auth.signOut()
-	}
+    logout() {
+        console.log("logging out . . .");
+        return this.auth.signOut();
+    }
 
-	async register(name, email, password) {
-		await this.auth.createUserWithEmailAndPassword(email, password)
-		return this.auth.currentUser.updateProfile({
-			displayName: name
-		})
-	}
+    async register(name, email, password) {
+        await this.auth.createUserWithEmailAndPassword(email, password);
+        return this.auth.currentUser.updateProfile({
+            displayName: name
+        });
+    }
 
-	updateHighestScore(doc, highestScore, highestScorer) {
-		return this.db.collection('games').doc(doc).update({ highestScore, highestScorer });
-	}
+    updateHighestScore(doc, highestScore, highestScorer) {
+        return this.db
+            .collection("games")
+            .doc(doc)
+            .update({ highestScore, highestScorer });
+    }
 
-	isInitialized() {
-		return new Promise<boolean>(resolve => {
-			this.auth.onAuthStateChanged(resolve)
-		})
-	}
+    isInitialized() {
+        return new Promise<boolean>(resolve => {
+            this.auth.onAuthStateChanged(resolve);
+        });
+    }
 
-	getCurrentUsername() {
-		console.log(this.auth.currentUser);
-		return this.auth.currentUser && this.auth.currentUser.displayName
-	}
+    getCurrentUsername() {
+        console.log(this.auth.currentUser);
+        return this.auth.currentUser && this.auth.currentUser.displayName;
+    }
 
-	// async getCurrentUserQuote() {
-	// 	const quote = await this.db.doc(`users_codedamn_video/${this.auth.currentUser.uid}`).get()
-	// 	return quote.get('quote')
-	// }
-	getOneById(collection: string, _id: string): Promise<any> {
-		return new Promise((resolve, reject) => {
-			this.db.collection(collection).doc(_id).get().then((snapshot) => {
-				resolve(snapshot)
-			});
-		});
-	}
+    // async getCurrentUserQuote() {
+    // 	const quote = await this.db.doc(`users_codedamn_video/${this.auth.currentUser.uid}`).get()
+    // 	return quote.get('quote')
+    // }
+    getOneById(collection: string, _id: string): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.db
+                .collection(collection)
+                .doc(_id)
+                .get()
+                .then(snapshot => {
+                    resolve(snapshot);
+                });
+        });
+    }
     subscribeTo(collection: string, callback: Function) {
         this.db.collection(collection).onSnapshot(function(querySnapshot) {
             const newArr: any = [];
             querySnapshot.forEach(function(doc) {
-				const item = doc.data();
-				item._id = doc.id;
+                const item = doc.data();
+                item._id = doc.id;
                 newArr.push(item);
             });
             callback(newArr);
         });
     }
     async getAll(collection: string) {
-		return await this.db.collection(collection).get()
+        return await this.db.collection(collection).get();
     }
 }
 
-export default new Firebase()
+export default new Firebase();

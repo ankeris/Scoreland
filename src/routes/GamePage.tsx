@@ -6,107 +6,13 @@ import { Game } from "../models/Game.model";
 import DynamicButtoon from "../components/DynamicButton";
 import Motivation from "../motivationalQuotes";
 import CountUp from "react-countup";
+import RouterButton from "../components/RouterButton";
 import LinkButton from "../components/LinkButton";
 import Loading from "../components/Loading";
 // Games
 import { selfpong } from "../gamesLogic/selfpong/selfpong";
 import { scorebird } from "../gamesLogic/scorebird/sketch";
-
-// const GamePage: FunctionComponent<any> = (props: RouteComponentProps) => {
-//     const [gameCanvas, setGameCanvas] = useState<any>(null);
-//     const [gameInfo, setGameInfo] = useState<Game>({ name: "", complexity: 0, highestScore: 0, highestScorer: "", _id: "" });
-//     const [gameLost, setGameLost] = useState<Boolean>(false);
-//     const [score, setScore] = useState<Number>(0);
-
-//     const restartGame = () => {
-//         setGameLost(false);
-//         const gameId = props.match.params.id;
-//         firebase.getOneById("games", gameId).then(data => {
-//             const game: Game = data.data();
-//             game._id = data.id;
-//             setGameInfo(game);
-//         });
-//     };
-
-//     useEffect(() => {
-//         const gameId = props.match.params.id;
-//         firebase.getOneById("games", gameId).then(data => {
-//             const game: Game = data.data();
-//             game._id = data.id;
-//             setGameInfo(game);
-//         });
-//     }, []);
-
-//     useEffect(() => {
-//         console.log("received: " + gameInfo.name);
-//         switch (gameInfo.name) {
-//             case "Self pong":
-//                 setGameCanvas(
-//                     selfpong(score => {
-//                         setScore(score);
-//                         setGameLost(true);
-//                         console.log(gameInfo.highestScore);
-
-//                         if (score > gameInfo.highestScore) {
-//                             firebase.updateHighestScore(gameInfo._id, score, localStorage.getItem("user"));
-//                         }
-//                         return;
-//                     })
-//                 );
-//                 break;
-//             case "Scorebird":
-//                 setGameCanvas(
-//                     scorebird(score => {
-//                         setScore(score);
-//                         setGameLost(true);
-
-//                         if (score > gameInfo.highestScore) {
-//                             firebase.updateHighestScore(gameInfo._id, score, localStorage.getItem("user"));
-//                         }
-//                         return;
-//                     })
-//                 );
-//                 break;
-//             case "Other":
-//                 break;
-//             default:
-//             // code block
-//         }
-//     }, [gameInfo]);
-
-//     useEffect(() => {
-//         if (gameLost) {
-//             unmountComponentAtNode(document.getElementById("root") as any);
-//             gameCanvas.remove();
-//             gameCanvas.clear();
-//             setGameCanvas(null);
-//         }
-//     }, [gameLost]);
-
-//     return gameInfo ? (
-//         <div className="content-section content-center">
-//             <LinkButton text="Go Back" link="/library" modifier="danger" />
-//             <h1 className="title">{gameInfo.name}</h1>
-//             {gameLost ? (
-//                 <div className="content-center">
-//                     <h2>
-//                         <CountUp end={score} className="title" prefix="score: " />
-//                     </h2>
-//                     <div className="grid-box">
-//                         <LinkButton text="Go Back" link="/library" modifier="danger" />
-//                         <DynamicButtoon clickHandler={restartGame} name="Restart!" info={Motivation.getRandomQuote()} />
-//                     </div>
-//                 </div>
-//             ) : (
-//                 <div id="myContainer" />
-//             )}
-//         </div>
-//     ) : (
-//         <Loading />
-//     );
-// };
-// export default GamePage;
-
+import { scuffedsnake } from "../gamesLogic/scoresnake/sketch";
 export default class GamePage extends Component<RouteComponentProps, any> {
     constructor(props) {
         super(props);
@@ -120,6 +26,7 @@ export default class GamePage extends Component<RouteComponentProps, any> {
 
     componentDidMount() {
         const gameId = this.props.match.params.id;
+        console.log(gameId);
         firebase.getOneById("games", gameId).then(data => {
             const game: Game = data.data();
             game._id = data.id;
@@ -130,58 +37,46 @@ export default class GamePage extends Component<RouteComponentProps, any> {
         });
     }
 
-    restartGame = () => {
-        this.setState({
-            gameLost: false
-        });
-
-        // const gameId = this.props.match.params.id;
-        // firebase.getOneById("games", gameId).then(data => {
-        //     const game: Game = data.data();
-        //     game._id = data.id;
-        //     this.setState({
-        //         gameInfo: game
-        //     });
-        //     this.startGame();
-        // });
-    };
-
     startGame = () => {
         console.log("received: " + this.state.gameInfo.name);
         switch (this.state.gameInfo.name) {
             case "Self pong":
-                const smth = selfpong(score => {
+                selfpong(score => {
                     this.setState({
-                        gameLost: true
+                        gameLost: true,
+                        score
                     });
-                    smth.clear();
-                    smth.remove();
-
-                    if (score > this.state.gameInfo.highestScore) {
-                        firebase.updateHighestScore(this.state.gameInfo._id, score, localStorage.getItem("user"));
-                    }
+                    this.tryUpdateScore(score);
                     return;
                 });
-
                 break;
             case "Scorebird":
-                this.setState({
-                    gameCanvas: scorebird(score => {
-                        this.setState({
-                            gameLost: true
-                        });
-                        this.clearCanvas();
-                        if (score > this.state.gameInfo.highestScore) {
-                            firebase.updateHighestScore(this.state.gameInfo._id, score, localStorage.getItem("user"));
-                        }
-                        return;
-                    })
+                scorebird(score => {
+                    this.setState({
+                        gameLost: true,
+                        score
+                    });
+                    this.tryUpdateScore(score);
+                    return;
                 });
                 break;
-            case "Other":
+            case "Scuffed Snake":
+                scuffedsnake(score => {
+                    this.setState({
+                        gameLost: true,
+                        score
+                    });
+                    this.tryUpdateScore(score);
+                });
                 break;
             default:
             // code block
+        }
+    };
+
+    tryUpdateScore = score => {
+        if (score > this.state.gameInfo.highestScore) {
+            firebase.updateHighestScore(this.state.gameInfo._id, score, localStorage.getItem("user"));
         }
     };
 
@@ -191,32 +86,22 @@ export default class GamePage extends Component<RouteComponentProps, any> {
         });
     };
 
-    // useEffect(() => {
-    //     if (gameLost) {
-    //         unmountComponentAtNode(document.getElementById("root") as any);
-    //         gameCanvas.remove();
-    //         gameCanvas.clear();
-    //         setGameCanvas(null);
-    //     }
-    // }, [gameLost]);
-
-    // render will know everything!
     render() {
         return this.state.gameInfo ? (
             <div className="content-section content-center">
-                {/* <LinkButton text="Go Back" link="/library" modifier="danger" /> */}
-                <a className="grid-box__item content-center bg-light button button--danger" href="/library">
-                    Go Back
-                </a>
+                {/* <RouterButton text="Go Back" link="/library" modifier="danger" /> */}
+                <LinkButton modifier="danger" text="Go back" link="/library" />
                 <h1 className="title">{this.state.gameInfo.name}</h1>
                 {this.state.gameLost ? (
                     <div className="content-center">
                         <h2>
                             <CountUp end={this.state.score} className="title" prefix="score: " />
                         </h2>
+                        <p>{Motivation.getRandomQuote()}</p>
                         <div className="grid-box">
                             <LinkButton text="Go Back" link="/library" modifier="danger" />
-                            <DynamicButtoon clickHandler={this.restartGame} name="Restart!" info={Motivation.getRandomQuote()} />
+                            {/* <DynamicButtoon clickHandler={this.restartGame} name="Restart!" info={Motivation.getRandomQuote()} /> */}
+                            <LinkButton modifier="success" text="Restart" link={"/game/" + this.state.gameInfo._id} />
                         </div>
                     </div>
                 ) : (

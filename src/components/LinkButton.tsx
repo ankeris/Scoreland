@@ -1,8 +1,7 @@
-import React from 'react';
-import { Link } from "react-router-dom";
+import React from "react";
 
-export default ({text, link, modifier}) => 
-<Link className={`grid-box__item content-center bg-light button button--${modifier}`} to={{pathname: link}}>
-    <h2 className="title">{text}</h2>
-</Link>
-
+export default ({ text, link, modifier }) => (
+    <a className={`grid-box__item content-center bg-light button button--${modifier}`} href={link}>
+        {text}
+    </a>
+);

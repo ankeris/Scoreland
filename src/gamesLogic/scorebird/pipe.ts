@@ -1,11 +1,13 @@
 export class Pipe {
-    spacing: number = 175;
-    top: number = this.p5.random(this.p5.height / 6, (3 / 4) * this.p5.height);
+    spacing: number = 110;
+    top: number = this.p5.random(this.p5.height / 8, (3 / 4) * this.p5.height);
     bottom: number = this.p5.height - (this.top + this.spacing);
     x: number = this.p5.width;
-    w: number = 80;
-    speed: number = 6;
+    w: number = 60;
+    speed: number = 8;
     highlight: boolean = false;
+    private potential: boolean = true;
+
     constructor(public p5) {}
 
     hits(bird) {
@@ -15,7 +17,16 @@ export class Pipe {
                 return true;
             }
         }
+
         this.highlight = false;
+        return false;
+    }
+
+    isPoint(bird) {
+        if (this.potential && (bird.x > this.x && bird.x < this.x + this.w)) {
+            this.potential = false;
+            return true;
+        }
         return false;
     }
 
