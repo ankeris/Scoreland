@@ -1,41 +1,46 @@
 {
-  "name": "scoreland",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@types/jest": "24.0.11",
-    "@types/node": "11.13.0",
-    "@types/react": "16.8.12",
-    "@types/react-dom": "16.8.3",
-    "firebase": "^5.9.3",
-    "jwt-decode": "^2.2.0",
-    "p5": "^0.7.3",
-    "react": "^16.8.6",
-    "react-countup": "^4.1.3",
-    "react-dom": "^16.8.6",
-    "react-router-dom": "^5.0.0",
-    "react-scripts": "2.1.8",
-    "typescript": "3.4.2",
-    "workbox-sw": "^4.3.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "styles": "less-watch-compiler src/less public/styles global.less"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "devDependencies": {
-    "less": "^3.9.0",
-    "less-watch-compiler": "^1.13.0"
-  }
+    "name": "scoreland",
+    "version": "0.1.0",
+    "private": true,
+    "homepage": "http://10.0.75.1:8080/",
+    "dependencies": {
+        "@types/jest": "24.0.11",
+        "@types/node": "11.13.0",
+        "@types/react": "16.8.12",
+        "@types/react-dom": "16.8.3",
+        "firebase": "^5.9.3",
+        "http-server": "^0.11.1",
+        "jwt-decode": "^2.2.0",
+        "p5": "^0.7.3",
+        "react": "^16.8.6",
+        "react-countup": "^4.1.3",
+        "react-dom": "^16.8.6",
+        "react-router-dom": "^5.0.0",
+        "react-scripts": "2.1.8",
+        "typescript": "3.4.2",
+        "workbox-sw": "^4.3.1"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build && workbox injectManifest workbox-config.js",
+        "manifest": "workbox injectManifest workbox-config.js",
+        "prod": "http-server build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "styles": "less-watch-compiler src/less public/styles global.less"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": [
+        ">0.2%",
+        "not dead",
+        "not ie <= 11",
+        "not op_mini all"
+    ],
+    "devDependencies": {
+        "less": "^3.9.0",
+        "less-watch-compiler": "^1.13.0",
+        "workbox-cli": "^4.3.1"
+    }
 }

@@ -1,8 +1,9 @@
-importScripts("workbox-sw");
+importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.5.0/workbox-sw.js");
 
-workbox.setConfig({ modulePathPrefix: "workbox-sw" });
+if (workbox) {
+    console.log(`Yay! Workbox is loaded 🎉`);
 
-const precacheManifest = [];
-
-workbox.precaching.suppressWarnings();
-workbox.precaching.precacheAndRoute(precacheManifest);
+    workbox.precaching.precacheAndRoute([]);
+} else {
+    console.log(`Boo! Workbox didn't load 😬`);
+}

@@ -1,30 +1,9 @@
-/**
- * Welcome to your Workbox-powered service worker!
- *
- * You'll need to register this file in your web app and you should
- * disable HTTP caching for this file too.
- * See https://goo.gl/nhQhGp
- *
- * The rest of the code is auto-generated. Please don't update this file
- * directly; instead, make changes to your Workbox build configuration
- * and re-run your build process.
- * See https://goo.gl/2aRDsh
- */
+importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.5.0/workbox-sw.js");
 
-importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+if (workbox) {
+    console.log(`Yay! Workbox is loaded 🎉`);
 
-self.addEventListener('message', (event) => {
-  if (event.data && event.data.type === 'SKIP_WAITING') {
-    self.skipWaiting();
-  }
-});
-
-/**
- * The workboxSW.precacheAndRoute() method efficiently caches and responds to
- * requests for URLs in the manifest.
- * See https://goo.gl/S9QRab
- */
-self.__precacheManifest = [
+    workbox.precaching.precacheAndRoute([
   {
     "url": "android-chrome-192x192.png",
     "revision": "7f9e64368d26ac09678db34b9bbbcb21"
@@ -111,7 +90,7 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "24ed3cfd563ad9d9a92da2a6d2a20a82"
+    "revision": "8b4e1165356554e3d0d1dd990a8d807e"
   },
   {
     "url": "logo.svg",
@@ -149,5 +128,7 @@ self.__precacheManifest = [
     "url": "styles/global.css",
     "revision": "7744fb52d4dc7fbbdf3c851bf018ee01"
   }
-].concat(self.__precacheManifest || []);
-workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
+]);
+} else {
+    console.log(`Boo! Workbox didn't load 😬`);
+}
