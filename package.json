@@ -8,6 +8,7 @@
         "@types/node": "11.13.0",
         "@types/react": "16.8.12",
         "@types/react-dom": "16.8.3",
+        "express": "^4.16.4",
         "firebase": "^5.9.3",
         "http-server": "^0.11.1",
         "jwt-decode": "^2.2.0",
@@ -17,14 +18,15 @@
         "react-dom": "^16.8.6",
         "react-router-dom": "^5.0.0",
         "react-scripts": "2.1.8",
+        "superstatic": "^6.0.4",
         "typescript": "3.4.2",
         "workbox-sw": "^4.3.1"
     },
     "scripts": {
         "start": "react-scripts start",
-        "build": "react-scripts build && workbox injectManifest workbox-config.js",
+        "build": "react-scripts build",
         "manifest": "workbox injectManifest workbox-config.js",
-        "prod": "http-server build",
+        "prod": "superstatic build --port 8080 --host 127.0.0.1",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "styles": "less-watch-compiler src/less public/styles global.less"

@@ -16,6 +16,6 @@
         "jsx": "preserve",
         "isolatedModules": true
     },
-    "include": ["src"],
+    "include": ["src", "index.js"],
     "exclude": ["src/sw.js"]
 }

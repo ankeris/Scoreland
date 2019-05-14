@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter,
   Route,
+  HashRouter,
   Redirect,
   Switch,
 } from 'react-router-dom'
@@ -49,17 +50,17 @@ const Scoreland = () => {
   }, []);
 
   return firebaseLoaded ? (
-    <BrowserRouter>
+    <HashRouter >
       <Header setAuth={(e) => setUserAuthenticated(e)} authed={userAuthenticated}/>
       <Switch>
-        <Route path="/login" render={props => <Login {...props} setAuth={(e) => setUserAuthenticated(e)} />} />
-        <Route path="/register" render={props => <Register {...props} />} />
-        <Route path="/auth" render={props => <Auth {...props} />} />
-        <PrivateRoute authed={userAuthenticated} path="/library" component={Library} />
-        <PrivateRoute authed={userAuthenticated} path="/game/:id" component={GamePage} />
+        <Route path="/login" exact render={props => <Login {...props} setAuth={(e) => setUserAuthenticated(e)} />} />
+        <Route path="/register" exact render={props => <Register {...props} />} />
+        <Route path="/auth" exact render={props => <Auth {...props} />} />
+        <PrivateRoute authed={userAuthenticated} path="/library" exact component={Library} />
+        <PrivateRoute authed={userAuthenticated} path="/game/:id" exact component={GamePage} />
         <Redirect from="/" to='/library' />
       </Switch>
-    </BrowserRouter>
+    </HashRouter >
   ) : <Loading />
 };
 /* <Redirect from="/" to='/library' />
