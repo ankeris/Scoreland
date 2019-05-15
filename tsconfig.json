@@ -17,5 +17,5 @@
         "isolatedModules": true
     },
     "include": ["src", "index.js"],
-    "exclude": ["src/sw.js"]
+    "exclude": ["src/sw.js", "index.js"]
 }

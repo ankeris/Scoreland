@@ -12,14 +12,14 @@ if (workbox) {
     /* Cache doc (HTML) */
     workbox.routing.registerRoute(
       new RegExp(/(\/)((\?utm.*)$|$)/),
-      workbox.strategies.networkFirst({
+      workbox.strategies.cacheFirst({
           cacheName: "doc"
       })
     ); 
 
     // Caching Content from Multiple Origins
     workbox.routing.registerRoute(
-      /.*(?:googleapis|gstatic)\.com.*$/,
+      /.*(?:googleapis|gstatic|firestore)\.com.*$/,
       workbox.strategies.networkFirst({
           cacheName: "google-apis",
           plugins: [
@@ -40,23 +40,23 @@ if (workbox) {
     
     /* Cache Font Files */
     workbox.routing.registerRoute(
-      new RegExp(/(woff|woff2|ttf)((\?.*)$|$)/),
+      new RegExp(/(woff|woff2|ttf|otf)((\?.*)$|$)/),
       workbox.strategies.cacheFirst({
           cacheName: "static-fonts"
       })
     ); 
 
-    //Cache Gasautomaten Dealers
+    // Other types of files that are most likely not going to change
     workbox.routing.registerRoute(
-      /.*(?:bulk.kosangas)\.dk.*$/,
-      workbox.strategies.networkFirst({
-          cacheName: "gasautomaten"
+      new RegExp(/(webmanifest|json)((\?.*)$|$)/),
+      workbox.strategies.cacheFirst({
+          cacheName: "other-files"
       })
-    ); 
+    );
 
     /* Caching Images */
     workbox.routing.registerRoute(
-      new RegExp(/(jpg|jpeg|gif|png|svg)((\?.*)$|$)/),
+      new RegExp(/(jpg|jpeg|gif|png|svg|ico)((\?.*)$|$)/),
       workbox.strategies.cacheFirst({
           cacheName: "images",
           plugins: [
