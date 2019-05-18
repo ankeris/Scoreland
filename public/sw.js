@@ -1,26 +1,37 @@
-importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js');
 
 if (workbox) {
     console.log('workbox is working');
 
-    /* Set debug to true, for console logging */ 
+    self.addEventListener('install', (event) => {
+      self.skipWaiting();
+    });
+    
+    self.addEventListener('activate', event => {
+      event.waitUntil(clients.claim());
+    });
+
+    /* Set debug to true, for console logging */
     workbox.setConfig({
       debug: true
-    }); 
-    console.log(workbox.routing);
+    });
+    
+    workbox.routing.registerNavigationRoute("/index.html", {
+      blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
+    });
     
     /* Cache doc (HTML) */
-    workbox.routing.registerRoute(
-      new RegExp(/(\/)((\?utm.*)$|$)/),
-      workbox.strategies.cacheFirst({
-          cacheName: "doc"
-      })
-    ); 
+    // workbox.routing.registerRoute(
+    //   new RegExp(/(\/)((\?utm.*)$|$)/),
+    //   new workbox.strategies.CacheFirst({
+    //       cacheName: "doc"
+    //   })
+    // ); 
 
     // Caching Content from Multiple Origins
     workbox.routing.registerRoute(
       /.*(?:googleapis|gstatic|firestore)\.com.*$/,
-      workbox.strategies.networkFirst({
+      new workbox.strategies.NetworkFirst({
           cacheName: "google-apis",
           plugins: [
               new workbox.cacheableResponse.Plugin({
@@ -32,8 +43,8 @@ if (workbox) {
 
     /* Cache CSS and JavaScript Files */
     workbox.routing.registerRoute(
-      new RegExp(/(css|js)((\?.*)$|$)/),
-      workbox.strategies.cacheFirst({
+      new RegExp(/(css|js|json|webmanifest)((\?.*)$|$)/),
+      new workbox.strategies.CacheFirst({
           cacheName: "static-resources"
       })
     ); 
@@ -41,23 +52,17 @@ if (workbox) {
     /* Cache Font Files */
     workbox.routing.registerRoute(
       new RegExp(/(woff|woff2|ttf|otf)((\?.*)$|$)/),
-      workbox.strategies.cacheFirst({
+      new workbox.strategies.CacheFirst({
           cacheName: "static-fonts"
       })
     ); 
 
     // Other types of files that are most likely not going to change
-    workbox.routing.registerRoute(
-      new RegExp(/(webmanifest|json)((\?.*)$|$)/),
-      workbox.strategies.cacheFirst({
-          cacheName: "other-files"
-      })
-    );
 
     /* Caching Images */
     workbox.routing.registerRoute(
       new RegExp(/(jpg|jpeg|gif|png|svg|ico)((\?.*)$|$)/),
-      workbox.strategies.cacheFirst({
+      new workbox.strategies.CacheFirst({
           cacheName: "images",
           plugins: [
               new workbox.expiration.Plugin({
