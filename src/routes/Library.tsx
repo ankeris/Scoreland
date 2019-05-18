@@ -3,6 +3,8 @@ import { RouteComponentProps } from "react-router-dom";
 import GameLibrary from "../containers/GameLibrary";
 import Firebase from "../firebase";
 import { Game } from "../models/Game.model";
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+
 interface State {
     games: Array<Game>;
 }
@@ -16,11 +18,11 @@ class App extends Component<RouteComponentProps<any>, State> {
     }
     componentDidMount() {
         Firebase.getAll("games").then(games => {
-            console.group("Games from firebase:");
-            games.forEach(function(doc) {
-                console.log(doc.id, " => ", doc.data());
-            });
-            console.groupEnd();
+            // console.group("Games from firebase:");
+            // games.forEach(function(doc) {
+            //     console.log(doc.id, " => ", doc.data());
+            // });
+            // console.groupEnd();
         });
         Firebase.subscribeTo("games", (gameArr: Array<Game>) => {
             this.setState({
