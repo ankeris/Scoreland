@@ -17,10 +17,9 @@ class Firebase {
     constructor() {
         app.initializeApp(config);
         this.auth = app.auth();
+        app.firestore().enablePersistence()
         this.db = app.firestore();
         this.auth.setPersistence(app.auth.Auth.Persistence.SESSION);
-        console.log(this.auth);
-        
     }
 
     login(email, password) {
