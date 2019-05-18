@@ -50,7 +50,7 @@ const Scoreland = () => {
   }, []);
 
   return firebaseLoaded ? (
-    <HashRouter >
+    <BrowserRouter >
       <Header setAuth={(e) => setUserAuthenticated(e)} authed={userAuthenticated}/>
       <Switch>
         <Route path="/login" exact render={props => <Login {...props} setAuth={(e) => setUserAuthenticated(e)} />} />
@@ -60,7 +60,7 @@ const Scoreland = () => {
         <PrivateRoute authed={userAuthenticated} path="/game/:id" exact component={GamePage} />
         <Redirect from="/" to='/library' />
       </Switch>
-    </HashRouter >
+    </BrowserRouter >
   ) : <Loading />
 };
 /* <Redirect from="/" to='/library' />
