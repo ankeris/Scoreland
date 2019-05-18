@@ -15,6 +15,8 @@ import NotFound from './routes/NotFound';
 import GamePage from './routes/GamePage';
 import Register from './routes/Register';
 import Loading from './components/Loading';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
 
 const checkAuth = () => {
   const token = localStorage.getItem('token');
@@ -36,8 +38,19 @@ const Scoreland = () => {
   const [firebaseLoaded, setFirebaseLoaded] = useState<boolean>(false);
 
   useEffect(() => {
+    window.addEventListener('load', function() {
+      const updateOnlineStatus = (event) => {
+        if (event.type == "offline") {
+          NotificationManager.warning('No network connection. Some functionalities might be unavailable', 'Offline mode', 5000)
+        } else {
+          NotificationManager.success('Your browser is online again', 'Online', 5000)
+        }
+      }
+    
+      window.addEventListener('online',  updateOnlineStatus);
+      window.addEventListener('offline', updateOnlineStatus);
+    });
     firebase.isInitialized().then((user) => {
-      console.log(user);
       if (user) {
         setUserAuthenticated(true);
         setFirebaseLoaded(true);
@@ -60,6 +73,7 @@ const Scoreland = () => {
         <PrivateRoute authed={userAuthenticated} path="/game/:id" exact component={GamePage} />
         <Redirect from="/" to='/library' />
       </Switch>
+      <NotificationContainer/>
     </BrowserRouter >
   ) : <Loading />
 };

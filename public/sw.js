@@ -13,7 +13,7 @@ if (workbox) {
 
     /* Set debug to true, for console logging */
     workbox.setConfig({
-      debug: true
+      debug: false
     });
     
     workbox.routing.registerNavigationRoute("/index.html", {
@@ -47,7 +47,7 @@ if (workbox) {
       new workbox.strategies.CacheFirst({
           cacheName: "static-resources"
       })
-    ); 
+    );
     
     /* Cache Font Files */
     workbox.routing.registerRoute(
