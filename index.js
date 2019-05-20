@@ -9,4 +9,4 @@ app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-app.listen(port, () => console.log(`Example app: http://localhost:${port}`))
+app.listen(process.env.PORT || port, () => console.log(`Example app: http://localhost:${port}`))
