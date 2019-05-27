@@ -16,8 +16,6 @@ if (workbox) {
       debug: false
     });
     
-    workbox.precaching.precacheAndRoute([]);
-
     workbox.routing.registerNavigationRoute("./index.html", {
       blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
     });
@@ -73,6 +71,8 @@ if (workbox) {
           ]
       })
     );
+
+    workbox.precaching.precacheAndRoute([]);
 } else {
     console.log(`Boo! Workbox didn't load 😬`);
 }
