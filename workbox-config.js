@@ -3,6 +3,6 @@ module.exports = {
   "globPatterns": [
     "**/*.html"
   ],
-  "swDest": "build\\sw.js",
-  "swSrc": "public/sw.js"
+  "swDest": "build\\service-worker.js",
+  "swSrc": "public/service-worker.js"
 };
