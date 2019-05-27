@@ -16,17 +16,17 @@ if (workbox) {
       debug: false
     });
     
-    workbox.routing.registerNavigationRoute("/index.html", {
-      blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
-    });
+    // workbox.routing.registerNavigationRoute("/index.html", {
+    //   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
+    // });
     
     /* Cache doc (HTML) */
-    // workbox.routing.registerRoute(
-    //   new RegExp(/(\/)((\?utm.*)$|$)/),
-    //   new workbox.strategies.CacheFirst({
-    //       cacheName: "doc"
-    //   })
-    // ); 
+    workbox.routing.registerRoute(
+      new RegExp(/(\/)((\?utm.*)$|$)/),
+      new workbox.strategies.CacheFirst({
+          cacheName: "doc"
+      })
+    ); 
 
     // Caching Content from Multiple Origins
     workbox.routing.registerRoute(
