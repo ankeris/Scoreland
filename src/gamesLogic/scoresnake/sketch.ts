@@ -1,20 +1,19 @@
 import p5 from "p5";
-let numSegments = 10;
-let direction = "right";
-
-const xStart = 0; //starting x coordinate for snake
-const yStart: number = 250; //starting y coordinate for snake
-const diff: number = 10;
-
-let xCor: Array<number> = [];
-let yCor: Array<number> = [];
-
-let xFruit = 0;
-let yFruit = 0;
-let score = 0;
-
 export const scuffedsnake = function(finalScore: Function) {
     return new p5(p => {
+        let numSegments = 10;
+        let direction = "right";
+
+        const xStart = 0; //starting x coordinate for snake
+        const yStart: number = 250; //starting y coordinate for snake
+        const diff: number = 10;
+
+        let xCor: Array<number> = [];
+        let yCor: Array<number> = [];
+
+        let xFruit = 0;
+        let yFruit = 0;
+        let score = 0;
         p.setup = () => {
             p.text(score, 10, 30);
             p.textSize(12);

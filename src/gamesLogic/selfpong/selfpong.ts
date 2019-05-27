@@ -1,11 +1,11 @@
 import p5 from "p5";
-let points = 0;
-let balls: any = [];
-let playRect;
-let startGame = "Press here to spawn a ball";
 
 const selfpong = function(finalScore: Function) {
     return new p5(p => {
+        let points = 0;
+        let balls: any = [];
+        let playRect: any = null;
+        let startGame = "Press here to spawn a ball";
         p.pointsCounter = function() {
             p.textAlign(p.LEFT);
             p.text(points, 10, 30);
@@ -133,9 +133,9 @@ const selfpong = function(finalScore: Function) {
                 }
 
                 if (this.y > 290) {
-                    finalScore(points);
                     p.remove();
                     p.clear();
+                    finalScore(points);
                 }
             }
         }

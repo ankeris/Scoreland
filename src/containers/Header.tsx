@@ -6,7 +6,7 @@ const Header: FunctionComponent<RouteComponentProps> = props => {
     return (
         <header className="App-header bg-dark">
             <div className="flex-row">
-                <img className="App-logo" src="/logo.svg" alt="" />
+                <img className="App-logo" src="logo.svg" alt="" />
                 <h1>Scoreland</h1>
                 <Link to="/highscores" className="push-horizontal button button--small">
                     Highscores

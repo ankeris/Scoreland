@@ -5,7 +5,8 @@ import {
   HashRouter,
   Redirect,
   Switch,
-} from 'react-router-dom'
+} from 'react-router-dom';
+import nanoid from 'nanoid';
 import firebase from './firebase';
 import Header from './containers/Header';
 import Auth from './routes/Auth';
@@ -18,16 +19,12 @@ import Loading from './components/Loading';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 
-const checkAuth = () => {
-  const token = localStorage.getItem('token');
-}
-
 function PrivateRoute ({component: Component, authed, ...rest}) {
   return (
     <Route
       {...rest}
       render={(props) => authed
-        ? <Component {...props} />
+        ? <Component {...props} key={nanoid(9)} />
         : <Redirect to={{pathname: '/login', state: {from: props.location}}} />}
     />
   )
@@ -63,7 +60,7 @@ const Scoreland = () => {
   }, []);
 
   return firebaseLoaded ? (
-    <BrowserRouter >
+    <HashRouter >
       <Header setAuth={(e) => setUserAuthenticated(e)} authed={userAuthenticated}/>
       <Switch>
         <Route path="/login" exact render={props => <Login {...props} setAuth={(e) => setUserAuthenticated(e)} />} />
@@ -74,7 +71,7 @@ const Scoreland = () => {
         <Redirect from="/" to='/library' />
       </Switch>
       <NotificationContainer/>
-    </BrowserRouter >
+    </HashRouter >
   ) : <Loading />
 };
 /* <Redirect from="/" to='/library' />

@@ -26,7 +26,7 @@ export default class GamePage extends Component<RouteComponentProps, any> {
 
     componentDidMount() {
         const gameId = this.props.match.params.id;
-        console.log(gameId);
+        
         firebase.getOneById("games", gameId).then(data => {
             const game: Game = data.data();
             game._id = data.id;
@@ -78,12 +78,6 @@ export default class GamePage extends Component<RouteComponentProps, any> {
         if (score > this.state.gameInfo.highestScore) {
             firebase.updateHighestScore(this.state.gameInfo._id, score, localStorage.getItem("user"));
         }
-    };
-
-    clearCanvas = () => {
-        this.setState({
-            gameCanvas: null
-        });
     };
 
     render() {

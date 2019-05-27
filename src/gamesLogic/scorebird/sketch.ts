@@ -2,11 +2,10 @@ import p5 from "p5";
 import { Pipe } from "./pipe";
 import { Bird } from "./bird";
 
-let bird;
-const pipes: Array<Pipe> = [];
-let points: number = 0;
-
 export const scorebird = function(finalScore: Function) {
+    let bird;
+    const pipes: Array<Pipe> = [];
+    let points: number = 0;
     return new p5(p => {
         p.setup = () => {
             p.createCanvas(800, 260).parent("myContainer");

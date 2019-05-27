@@ -336,13 +336,13 @@ template {
 }
 @font-face {
   font-family: 'cataclysmo';
-  src: url('/fonts/Cataclysmo.otf');
+  src: url('../fonts/Cataclysmo.otf');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: 'Atarian';
-  src: url('/fonts/AtarianSystem.ttf');
+  src: url('../fonts/AtarianSystem.ttf');
   font-weight: normal;
   font-style: normal;
 }
