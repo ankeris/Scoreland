@@ -16,8 +16,13 @@ if (workbox) {
       debug: false
     });
     
-    workbox.routing.registerNavigationRoute("/index.html");
-    
+    workbox.precaching.precacheAndRoute([
+      '/index.html',
+      /.*(?:scoreland)\*$/,
+      { url: '/index.html', revision: '383676' },
+    ], {
+      directoryIndex: null,
+    });
     /* Cache doc (HTML) */
     workbox.routing.registerRoute(
       /.*(?:scoreland)/,
