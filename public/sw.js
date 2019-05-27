@@ -18,7 +18,7 @@ if (workbox) {
     
     workbox.precaching.precacheAndRoute([
       {
-        "url": "index.html",
+        "url": "./index.html",
         "revision": "daf1c1fff982c52ea54235e1810e89df"
       }
     ]);
