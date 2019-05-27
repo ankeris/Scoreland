@@ -16,16 +16,15 @@ if (workbox) {
       debug: false
     });
     
+    workbox.precaching.precacheAndRoute([
+      {
+        "url": "index.html"
+      }
+    ]);
+    
     workbox.routing.registerNavigationRoute("./index.html", {
       blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
     });
-
-    workbox.routing.registerRoute(
-      new RegExp(/(html)((\?.*)$|$)/),
-      new workbox.strategies.CacheFirst({
-          cacheName: "doc",
-      })
-    );
 
     // Caching Content from Multiple Origins
     workbox.routing.registerRoute(
