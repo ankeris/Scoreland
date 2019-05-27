@@ -16,8 +16,10 @@ if (workbox) {
       debug: false
     });
     
-    workbox.precaching.precacheAndRoute([]);
-
+    workbox.precaching.precacheAndRoute([{
+        "url": "index.html",
+        "revision": "daf1c1fff982c52ea54235e1810e89df"
+      }]);
     workbox.routing.registerNavigationRoute("./index.html", {
       blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
     });
