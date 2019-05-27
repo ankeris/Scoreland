@@ -20,7 +20,7 @@ if (workbox) {
     
     /* Cache doc (HTML) */
     workbox.routing.registerRoute(
-      new RegExp(/(\/)((\?utm.*)$|$)/),
+      new RegExp(/(scoreland|html)((\?.*)$|$)/),
       new workbox.strategies.CacheFirst({
           cacheName: "doc"
       })
