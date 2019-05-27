@@ -20,7 +20,7 @@ if (workbox) {
     
     /* Cache doc (HTML) */
     workbox.routing.registerRoute(
-      /.*(?:scoreland)\.com.*$/,
+      /.*(?:scoreland)/,
       new workbox.strategies.CacheFirst({
           cacheName: "doc"
       })
