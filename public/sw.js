@@ -20,7 +20,7 @@ if (workbox) {
     
     /* Cache doc (HTML) */
     workbox.routing.registerRoute(
-      new RegExp(/(scoreland|html)((\?.*)$|$)/),
+      /.*(?:scoreland)\.com.*$/,
       new workbox.strategies.CacheFirst({
           cacheName: "doc"
       })
@@ -49,7 +49,7 @@ if (workbox) {
     
     /* Cache Font Files */
     workbox.routing.registerRoute(
-      new RegExp(/(woff|woff2|ttf|otf)((\?.*)$|$)/),
+      new RegExp(/(woff|woff2|ttf|otf|html)((\?.*)$|$)/),
       new workbox.strategies.CacheFirst({
           cacheName: "static-fonts"
       })
