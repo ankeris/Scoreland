@@ -16,9 +16,7 @@ if (workbox) {
       debug: false
     });
     
-    // workbox.routing.registerNavigationRoute("/index.html", {
-    //   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
-    // });
+    workbox.routing.registerNavigationRoute("/index.html");
     
     /* Cache doc (HTML) */
     workbox.routing.registerRoute(
